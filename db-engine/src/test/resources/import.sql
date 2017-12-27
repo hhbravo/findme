@@ -15,3 +15,8 @@ INSERT INTO user(username, id_role, password, status) VALUES('test', 1, 'd8a8201
 
 INSERT INTO user_role(id_user, id_role, status) VALUES(1, 1, 1);
 INSERT INTO user_role(id_user, id_role, status) VALUES(2, 2, 1);
+
+
+INSERT INTO empresa(nombre,  ruc, status) VALUES('tinker-solutions', '12345678910', 1);
+INSERT INTO empresa(nombre,  ruc, status) VALUES('digital-cook', '0123456789', 1);
+
