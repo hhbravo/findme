@@ -144,30 +144,28 @@ CREATE TABLE `usuario_empresas`  (
 -- ----------------------------
 -- Records of usuario_empresas
 -- ----------------------------
-INSERT INTO `usuario_empresas` VALUES (1, 1, 1, 1, 'ADMIN', '2017-12-11 00:19:46', NULL, NULL);
-
 -- ----------------------------
 -- Table structure for usuarios
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lastName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `account` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `active` boolean NOT NULL,
-  `usuario_creacion` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `fecha_creacion` datetime(0) NOT NULL,
-  `usuario_modificacion` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `fecha_modificacion` datetime(0) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+ `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_role` INT(11) DEFAULT NULL,
+  `username` TEXT NOT NULL,
+  `password` TEXT NOT NULL,
+  `first_name` VARCHAR(255) NOT NULL,
+  `last_name` VARCHAR(255) NOT NULL,
+  `last_login` DATETIME NULL DEFAULT NULL,
+  `status` BIT(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_user_rol`
+  FOREIGN KEY (`id_role`)
+  REFERENCES `bbva_testcase_generator`.`role` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
--- ----------------------------
--- Records of usuarios
--- ----------------------------
-INSERT INTO `usuarios` VALUES (1, 'Tinker', 'Solutions', 'Factory', 'tinker', 'XXX', 1, 'ADMIN', '2017-12-11 00:16:14', NULL, NULL);
+
 
 SET FOREIGN_KEY_CHECKS = 1;

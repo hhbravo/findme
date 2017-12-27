@@ -1,8 +1,5 @@
 package pe.tinker.solutions.security.auth.ajax;
 
-import com.tinker.factory.findme.canonico.User;
-import com.tinker.factory.findme.security.model.UserContext;
-import com.tinker.factory.findme.service.impl.DatabaseUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,7 +13,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+import pe.tinker.solutions.common.Util;
+import pe.tinker.solutions.db.model.Role;
+import pe.tinker.solutions.db.model.User;
+import pe.tinker.solutions.rest.service.IDatabaseUserService;
+import pe.tinker.solutions.security.model.UserContext;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,10 +30,10 @@ import java.util.stream.Collectors;
 @Component
 public class AjaxAuthenticationProvider implements AuthenticationProvider {
     private final BCryptPasswordEncoder encoder;
-    private final DatabaseUserService userService;
+    private final IDatabaseUserService userService;
 
     @Autowired
-    public AjaxAuthenticationProvider(final DatabaseUserService userService, final BCryptPasswordEncoder encoder) {
+    public AjaxAuthenticationProvider(final IDatabaseUserService userService, final BCryptPasswordEncoder encoder) {
         this.userService = userService;
         this.encoder = encoder;
     }
@@ -44,7 +48,7 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
 
         User user = userService.getByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User no encontrado: " + username));
 
-        if (!user.getActive()) {
+        if (!user.getStatus()) {
             throw new BadCredentialsException("User inactivo.");
         }
 
@@ -53,16 +57,16 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
         }
 
 
-        if (user.getUserRols() == null) throw new InsufficientAuthenticationException("User no tiene roles asignados");
+        if (user.getRole() == null) throw new InsufficientAuthenticationException("User no tiene roles asignados");
 
-        List<GrantedAuthority> authorities = user.getUserRols().stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getRol().authority()))
-                .collect(Collectors.toList());
+        List<GrantedAuthority> authorities = Util.grantedAuthorities(user.getRole());
 
-        UserContext userContext = UserContext.create(user.getUserId(), authorities);
+        UserContext userContext = UserContext.create(user.getId(), authorities);
 
         return new UsernamePasswordAuthenticationToken(userContext, null, userContext.getAuthorities());
     }
+
+  
 
     @Override
     public boolean supports(Class<?> authentication) {

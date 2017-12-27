@@ -50,15 +50,14 @@ public class JwtTokenFactory {
 
         Claims claims = Jwts.claims().setSubject(String.valueOf(userContext.getUserId()));
         User userDto = usuarioService.loadUserByUser(userContext.getUserId());
-        if (ADMIN.equals(userDto.getEmail())) {
-            claims.put(CUENTA_USER, userDto.getAccount());
-            claims.put(ADMINISTRADOR, ADMINISTRADOR_USER);
-            claims.put(ADMIN, true);
+        if (ADMIN.equals(userDto.getUsername())) {
+            claims.put(CUENTA_USER, userDto.getUsername());
+            claims.put(ADMINISTRADOR, userDto.getRole().getRoleName());
             String token = generateToken(claims);
             return new AccessJwtToken(token, claims);
         }
 
-        claims.put(CUENTA_USER, userDto.getAccount());
+        claims.put(CUENTA_USER, userDto.getUsername());
         claims.put(USER, generateNameUserToken(userDto));
         claims.put(ADMIN, false);
         String token = generateToken(claims);
@@ -78,10 +77,12 @@ public class JwtTokenFactory {
     }
 
     private String generateNameUserToken(User user) {
-        return StringUtil.toCamelCase(user.getName())
+        return user.getFirstName()
                 .concat(" ")
-                .concat(StringUtil.toCamelCase(user.getLastName()));
+                .concat(user.getLastName());
     }
+
+
 
     public JwtToken createRefreshToken(UserContext userContext) {
         if (userContext.getUserId() == null) {
@@ -90,14 +91,14 @@ public class JwtTokenFactory {
 
         Claims claims = Jwts.claims().setSubject(String.valueOf(userContext.getUserId()));
         User userDto = usuarioService.loadUserByUser(userContext.getUserId());
-        if (ADMIN.equals(userDto.getAccount())) {
-            claims.put(CUENTA_USER, userDto.getAccount());
-            claims.put(ADMINISTRADOR, ADMINISTRADOR_USER);
+        if (ADMIN.equals(userDto.getUsername())) {
+            claims.put(CUENTA_USER, userDto.getUsername());
+            claims.put(ADMINISTRADOR, userDto.getRole().getRoleName());
             String token = generateToken(claims);
             return new AccessJwtToken(token, claims);
         }
 
-        claims.put(CUENTA_USER, userDto.getAccount());
+        claims.put(CUENTA_USER, userDto.getUsername());
         claims.put(USER, generateNameUserToken(userDto));
 
 

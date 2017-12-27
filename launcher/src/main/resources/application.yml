@@ -45,8 +45,6 @@ spring:
       hibernate:
           order_inserts: true
           order_updates: true
-          ejb:
-            interceptor: com.tinker.factory.findme.jpa.FindmeEntityInterceptorImpl
           jdbc:
             batch_size: 400
             batch_versioned_data: true

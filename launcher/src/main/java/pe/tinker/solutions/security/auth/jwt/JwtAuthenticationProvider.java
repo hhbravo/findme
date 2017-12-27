@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import pe.tinker.solutions.common.Util;
 import pe.tinker.solutions.db.model.User;
 import pe.tinker.solutions.rest.service.IDatabaseUserService;
 import pe.tinker.solutions.security.auth.JwtAuthenticationToken;
@@ -48,9 +49,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
         User user = databaseUserService.getByUserId(subject).orElseThrow(() -> new UsernameNotFoundException("User Id no encontrado: " + subject));
 
-        List<GrantedAuthority> authorities = user.getUserRols().stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getRol().authority()))
-                .collect(Collectors.toList());
+        List<GrantedAuthority> authorities = Util.grantedAuthorities(user.getRole());
 
         UserContext context = UserContext.create(subject, authorities);
 

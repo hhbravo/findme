@@ -1,9 +1,6 @@
 package pe.tinker.solutions.security.auth.ajax;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tinker.factory.findme.security.model.UserContext;
-import com.tinker.factory.findme.security.model.token.JwtToken;
-import com.tinker.factory.findme.security.model.token.JwtTokenFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,6 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import pe.tinker.solutions.security.model.UserContext;
+import pe.tinker.solutions.security.model.token.JwtToken;
+import pe.tinker.solutions.security.model.token.JwtTokenFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

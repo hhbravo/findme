@@ -26,11 +26,11 @@ public class DatabaseUserServiceImpl implements IDatabaseUserService {
 
     @Override
     public Optional<User> getByUsername(String username) {
-        return this.userRepository.findByUsername(username);
+            return this.userRepository.findUserByUsername(username);
     }
 
     @Override
     public Optional<User> getByUserId(Integer userId) {
-        return this.userRepository.findByUserId(userId);
+        return this.userRepository.findUserById(userId);
     }
 }

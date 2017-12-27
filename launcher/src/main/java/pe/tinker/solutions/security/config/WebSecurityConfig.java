@@ -1,13 +1,6 @@
 package pe.tinker.solutions.security.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tinker.factory.findme.security.RestAuthenticationEntryPoint;
-import com.tinker.factory.findme.security.auth.ajax.AjaxAuthenticationProvider;
-import com.tinker.factory.findme.security.auth.ajax.AjaxLoginProcessingFilter;
-import com.tinker.factory.findme.security.auth.jwt.JwtAuthenticationProvider;
-import com.tinker.factory.findme.security.auth.jwt.JwtTokenAuthenticationProcessingFilter;
-import com.tinker.factory.findme.security.auth.jwt.SkipPathRequestMatcher;
-import com.tinker.factory.findme.security.auth.jwt.extractor.TokenExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +14,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pe.tinker.solutions.security.RestAuthenticationEntryPoint;
+import pe.tinker.solutions.security.auth.ajax.AjaxAuthenticationProvider;
+import pe.tinker.solutions.security.auth.ajax.AjaxLoginProcessingFilter;
+import pe.tinker.solutions.security.auth.jwt.JwtAuthenticationProvider;
+import pe.tinker.solutions.security.auth.jwt.JwtTokenAuthenticationProcessingFilter;
+import pe.tinker.solutions.security.auth.jwt.SkipPathRequestMatcher;
+import pe.tinker.solutions.security.auth.jwt.extractor.TokenExtractor;
 
 
 import java.util.Arrays;

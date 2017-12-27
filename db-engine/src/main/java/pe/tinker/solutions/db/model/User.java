@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,68 +12,48 @@ import java.util.List;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @Column
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Integer userId;
-    @Column(name = "active")
-    private Boolean active;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "name")
-    private String name;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @OneToOne
+    @JoinColumn(name = "id_role")
+    private Role role;
+
+    @Column(unique = true)
+    private String username;
+
+    @Column
+    private String password;
+
+    @Column(name = "first_name")
+    private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "password")
-    private String password;
-    @Column(name = "account")
-    private String account;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
-            org.hibernate.annotations.CascadeType.DELETE,
-            org.hibernate.annotations.CascadeType.MERGE,
-            org.hibernate.annotations.CascadeType.PERSIST})
 
-    private List<UserRol> userRols;
+    @Column
+    private Boolean status;
 
-    public Integer getUserId() {
-        return userId;
+    @Transient
+    //private List<AccessRole> accessRoles;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Boolean getActive() {
-        return active;
+    public String getUsername() {
+        return username;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -83,19 +64,35 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public List<UserRol> getUserRols() {
-        return userRols;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUserRols(List<UserRol> userRols) {
-        this.userRols = userRols;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getAccount() {
-        return account;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

@@ -2,6 +2,7 @@ package pe.tinker.solutions.db.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import pe.tinker.solutions.db.model.User;
 
@@ -12,11 +13,9 @@ import java.util.Optional;
  *
  * @author Entelgy
  */
-public interface IDatabaseUserRepository extends JpaRepository<User, Integer> {
-    @Query("select u from User u left join fetch u.userRols r where u.email=:username")
-    Optional<User> findByUsername(@Param("username") String username);
+public interface IDatabaseUserRepository extends CrudRepository<User, Integer> {
+    Optional<User> findUserByUsername(@Param("username") String username);
 
-    @Query("select u from User u left join fetch u.userRols r where u.userId=:userId")
-    Optional<User> findByUserId(@Param("userId") Integer userId);
+    Optional<User> findUserById(@Param("userId") Integer userId);
 }
 

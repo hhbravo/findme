@@ -24,12 +24,12 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public User loadUserByUser(final Integer idUser) {
-        return repository.loadUserByKey(idUser);
+        return repository.findUserById(idUser);
     }
 
     @Override
     public User loadUserByEmail(final String email) {
-        return repository.loadUserByEmail(email);
+        return repository.findUserByUsername(email);
     }
 
 }

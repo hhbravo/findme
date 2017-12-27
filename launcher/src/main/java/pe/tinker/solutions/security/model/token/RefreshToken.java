@@ -21,20 +21,13 @@ public class RefreshToken implements JwtToken {
      *
      * @param token
      * @param signingKey
-     *
-     * @throws BadCredentialsException
-     * @throws JwtExpiredTokenException
+
      *
      * @return
      */
     public static Optional<RefreshToken> create(RawAccessJwtToken token, String signingKey) {
         Jws<Claims> claims = token.parseClaims(signingKey);
 
-/*        List<String> scopes = claims.getBody().get("scopes", List.class);
-        if (scopes == null || scopes.isEmpty()
-                || !scopes.stream().filter(scope -> Scopes.REFRESH_TOKEN.authority().equals(scope)).findFirst().isPresent()) {
-            return Optional.empty();
-        }*/
 
         return Optional.of(new RefreshToken(claims));
     }

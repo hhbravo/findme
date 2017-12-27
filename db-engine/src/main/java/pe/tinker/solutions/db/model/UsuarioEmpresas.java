@@ -32,9 +32,6 @@ public class UsuarioEmpresas extends Auditoria implements Serializable {
     private Integer id;
     @Column(name = "estado")
     private int estado;
-    @JoinColumn(name = "id_empresa", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Empresas idEmpresa;
 
     public UsuarioEmpresas() {
     }
@@ -62,14 +59,6 @@ public class UsuarioEmpresas extends Auditoria implements Serializable {
 
     public void setEstado(int estado) {
         this.estado = estado;
-    }
-
-    public Empresas getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(Empresas idEmpresa) {
-        this.idEmpresa = idEmpresa;
     }
 
     @Override

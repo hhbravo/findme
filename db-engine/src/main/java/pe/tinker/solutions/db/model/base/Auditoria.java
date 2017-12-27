@@ -12,14 +12,14 @@ import java.util.Date;
  */
 public class Auditoria {
 
-    @Column(name = "usuario_creacion")
+    @Column(name = "user_create")
     private String usuarioCreacion;
-    @Column(name = "fecha_creacion")
+    @Column(name = "fec_create")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
-    @Column(name = "usuario_modificacion")
+    @Column(name = "user_modify")
     private String usuarioModificacion;
-    @Column(name = "fecha_modificacion")
+    @Column(name = "fec_modify")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
 

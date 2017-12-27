@@ -1,5 +1,6 @@
 package pe.tinker.solutions.db.repository;
 
+import org.springframework.data.repository.CrudRepository;
 import pe.tinker.solutions.db.model.User;
 
 /**
@@ -7,8 +8,8 @@ import pe.tinker.solutions.db.model.User;
  *
  * @author Entelgy
  */
-public interface IUsuarioRepository {
-    User loadUserByKey(Integer userId);
+public interface IUsuarioRepository extends CrudRepository<User, Integer> {
+    User findUserById(Integer userId);
 
-    User loadUserByEmail(String email);
+    User findUserByUsername(String email);
 }

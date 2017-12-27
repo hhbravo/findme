@@ -1,10 +1,7 @@
 package pe.tinker.solutions.security.auth.ajax;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tinker.factory.findme.common.ErrorCode;
-import com.tinker.factory.findme.common.ErrorResponse;
-import com.tinker.factory.findme.security.exceptions.AuthMethodNotSupportedException;
-import com.tinker.factory.findme.security.exceptions.JwtExpiredTokenException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +9,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
+import pe.tinker.solutions.common.ErrorCode;
+import pe.tinker.solutions.common.ErrorResponse;
+import pe.tinker.solutions.security.exceptions.AuthMethodNotSupportedException;
+import pe.tinker.solutions.security.exceptions.JwtExpiredTokenException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

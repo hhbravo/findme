@@ -2,7 +2,7 @@ package pe.tinker.solutions.security.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import com.tinker.factory.findme.security.model.token.JwtToken;
+
 
 /**
  * Created by hans_h'bravo on 21/12/2017.
@@ -11,7 +11,7 @@ import com.tinker.factory.findme.security.model.token.JwtToken;
 @ConfigurationProperties(prefix = "spring.security.jwt")
 public class JwtSettings {
     /**
-     * {@link JwtToken} will expire after this time.
+     * {@link pe.tinker.solutions.security.model.token.JwtToken} will expire after this time.
      */
     private Integer tokenExpirationTime;
 
@@ -21,12 +21,12 @@ public class JwtSettings {
     private String tokenIssuer;
 
     /**
-     * Key is used to sign {@link JwtToken}.
+     * Key is used to sign {@link pe.tinker.solutions.security.model.token.JwtToken}.
      */
     private String tokenSigningKey;
 
     /**
-     * {@link JwtToken} can be refreshed during this timeframe.
+     * {@link pe.tinker.solutions.security.model.token.JwtToken} can be refreshed during this timeframe.
      */
     private Integer refreshTokenExpTime;
 
