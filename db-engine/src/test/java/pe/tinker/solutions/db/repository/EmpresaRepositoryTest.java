@@ -32,4 +32,23 @@ public class EmpresaRepositoryTest {
         assertThat(results, is(not(nullValue())));
         assertThat(results.size(), is(2));
     }
+
+    @Test
+    public void findAllBusinessActive() {
+        List<Empresa> results = repository.findAllByEstado(true);
+        assertThat(results, is(not(nullValue())));
+        assertThat(results.size(), is(2));
+    }
+
+    @Test
+    public void saveBusiness() {
+        Empresa empresa = new Empresa();
+        empresa.setEstado(true);
+        empresa.setNombre("pepe");
+        empresa.setRuc("123123");
+        empresa.setTelefono(123123);
+        Empresa result = repository.save(empresa);
+        assertThat(result, is(not(nullValue())));
+        assertThat(result.getId(), is(not(nullValue())));
+    }
 }
