@@ -41,3 +41,22 @@ LOCK TABLES `user` WRITE;
 
 INSERT INTO user(username, id_role, password, first_name, last_name, status)
 VALUES('hbravo', 2, 'd8a820104dfaa7ebfabdf005672b20920975a39ac92ee4db41b4c47b2872c25d', 'Hans', 'Herrera', 1);
+
+
+DROP TABLE IF EXISTS `usiness`;
+CREATE TABLE `empresa`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `razon_social` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `ruc` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `direccion` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `telefono` int(30) NOT NULL,
+  `pagina_web` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `imagen_logo` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `estado` bit(1) NOT NULL,
+  `usuario_creacion` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `fecha_creacion` datetime(0),
+  `usuario_modificacion` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `fecha_modificacion` datetime(0) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;

@@ -34,10 +34,10 @@ import java.util.List;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String JWT_TOKEN_HEADER_PARAM = "Authorization";
-    public static final String FORM_BASED_LOGIN_ENTRY_POINT = "/api/auth/login";
-    public static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/api/**";
+    public static final String FORM_BASED_LOGIN_ENTRY_POINT = "/private/auth/login";
+    public static final String TOKEN_BASED_AUTH_ENTRY_POINT = "/private/**";
     public static final String BASED_PUBLIC_ENTRY_POINT = "/public/**";
-    public static final String TOKEN_REFRESH_ENTRY_POINT = "/api/auth/token";
+    public static final String TOKEN_REFRESH_ENTRY_POINT = "/private/auth/token";
 
     @Autowired
     private RestAuthenticationEntryPoint authenticationEntryPoint;
